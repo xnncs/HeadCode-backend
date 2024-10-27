@@ -1,5 +1,6 @@
 namespace HeadCode.DataAccess.DatabaseContexts;
 
+using Core.HelpingModels;
 using Core.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -9,6 +10,11 @@ public sealed class ApplicationDbContext : DbContext
     {
         
     }
+    
+    public DbSet<Problem> Problems { get; set; }
+    public DbSet<ProblemTest> ProblemTests { get; set; }
+    
+    public DbSet<Solution> Solutions { get; set; }
     
     public DbSet<User> Users { get; set; }
 

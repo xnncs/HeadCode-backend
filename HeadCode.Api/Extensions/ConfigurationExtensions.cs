@@ -5,6 +5,7 @@ using FastEndpoints;
 using Helpers.Abstract;
 using Helpers.Implementation;
 using Infrastructure.Extensions;
+using Mapster;
 using Microsoft.AspNetCore.CookiePolicy;
 
 public static class ConfigurationExtensions
@@ -19,6 +20,8 @@ public static class ConfigurationExtensions
         services.AddInfrastructureServices(configuration);
 
         services.AddScoped<IAuthHelper, AuthHelper>();
+        
+        services.AddMapster();
         
         return services;
     }

@@ -11,6 +11,8 @@ public class User
     
     public DateTime DateCreated { get; set; }
 
+    public List<Problem> ProblemsSolved { get; set; } = [];
+
     
     public static User Create(string username, string login, string email, string passwordHash)
     {

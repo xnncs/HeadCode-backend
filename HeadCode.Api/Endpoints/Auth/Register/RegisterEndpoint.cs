@@ -52,7 +52,7 @@ public class RegisterEndpoint : Endpoint<RegisterRequest, Results<Ok, BadRequest
         await using IDbContextTransaction transaction = await _dbContext.Database.BeginTransactionAsync(cancellationToken);
         try
         {
-            await _dbContext.Users.AddAsync(created, cancellationToken);
+            _dbContext.Users.Add(created);
             await _dbContext.SaveChangesAsync(cancellationToken);
             await transaction.CommitAsync(cancellationToken);
         }
