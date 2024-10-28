@@ -31,7 +31,7 @@ public class LoginEndpoint : Endpoint<LoginRequest, Results<Ok, BadRequest<strin
         Post("api/auth/login");
     }
 
-    public override async Task<Results<Ok, BadRequest<string>>> HandleAsync(
+    public override async Task<Results<Ok, BadRequest<string>>> ExecuteAsync(
         LoginRequest request, CancellationToken cancellationToken)
     {
         User? user = await _dbContext.Users.AsNoTracking()

@@ -25,7 +25,7 @@ public class GetProblemByIdEndpoint : Endpoint<GetProblemByIdRequest, Results<Ok
         AllowAnonymous();
     }
     
-    public override async Task<Results<Ok<GetProblemResponse>, NotFound>> HandleAsync(GetProblemByIdRequest request, CancellationToken cancellationToken)
+    public override async Task<Results<Ok<GetProblemResponse>, NotFound>> ExecuteAsync(GetProblemByIdRequest request, CancellationToken cancellationToken)
     {
         Problem? problem = await _dbContext.Problems.AsNoTracking()
                                            .FirstOrDefaultAsync(x => x.Id == request.Id, cancellationToken);

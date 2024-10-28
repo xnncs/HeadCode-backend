@@ -29,7 +29,7 @@ public class RegisterEndpoint : Endpoint<RegisterRequest, Results<Ok, BadRequest
         Post("api/auth/register");
     }
 
-    public override async Task<Results<Ok, BadRequest<string>, InternalServerError>> HandleAsync(RegisterRequest request, CancellationToken cancellationToken)
+    public override async Task<Results<Ok, BadRequest<string>, InternalServerError>> ExecuteAsync(RegisterRequest request, CancellationToken cancellationToken)
     {
         bool emailAlreadyUsed = await _dbContext.Users
                                                 .AnyAsync(x => x.Email == request.Email, cancellationToken);

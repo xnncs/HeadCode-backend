@@ -23,7 +23,7 @@ public class GetAllProblemsEndpoint : EndpointWithoutRequest<List<GetProblemResp
         AllowAnonymous();
     }
     
-    public override async Task<List<GetProblemResponse>> HandleAsync(CancellationToken cancellationToken)
+    public override async Task<List<GetProblemResponse>> ExecuteAsync(CancellationToken cancellationToken)
     {
         return await _dbContext.Problems.AsNoTracking()
                                                             .ProjectToType<GetProblemResponse>()

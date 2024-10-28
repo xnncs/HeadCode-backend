@@ -13,15 +13,19 @@ public static class ConfigurationExtensions
     public static IServiceCollection ConfigureDependencyInjection(this IServiceCollection services,
                                                                   IConfiguration configuration)
     {
-        services.AddOpenApi();
-
         services.AddDataAccessServices();
-        
         services.AddInfrastructureServices(configuration);
 
         services.AddScoped<IAuthHelper, AuthHelper>();
         
         services.AddMapster();
+
+        services.AddOpenApi();
+        services.AddEndpointsApiExplorer();
+        services.AddSwaggerGen();
+        
+        services.AddFastEndpoints();
+        
         
         return services;
     }
@@ -31,7 +35,8 @@ public static class ConfigurationExtensions
         // Configure the HTTP request pipeline.
         if (app.Environment.IsDevelopment())
         {
-            app.MapOpenApi();
+            app.UseSwagger();
+            app.UseSwaggerUI();
         }
         
         app.UseRouting();

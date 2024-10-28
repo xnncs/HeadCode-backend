@@ -23,7 +23,7 @@ public class AddProblemEndpoint : Endpoint<AddProblemRequest, Results<Created, B
         Post("api/problems/add");
     }
 
-    public override async Task<Results<Created, BadRequest<string>, InternalServerError>> HandleAsync(AddProblemRequest request, CancellationToken cancellationToken)
+    public override async Task<Results<Created, BadRequest<string>, InternalServerError>> ExecuteAsync(AddProblemRequest request, CancellationToken cancellationToken)
     {
         Problem created = Problem.Create(request.Title, request.Description);
         
@@ -32,6 +32,7 @@ public class AddProblemEndpoint : Endpoint<AddProblemRequest, Results<Created, B
         {
             _dbContext.Problems.Add(created);
             await _dbContext.SaveChangesAsync(cancellationToken);
+            await transaction.CommitAsync(cancellationToken);
         }
         catch (Exception exception)
         {

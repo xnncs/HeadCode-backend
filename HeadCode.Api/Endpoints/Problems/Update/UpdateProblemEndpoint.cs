@@ -21,11 +21,10 @@ public class UpdateProblemEndpoint : Endpoint<UpdateProblemRequest, Results<Ok, 
     
     public override void Configure()
     {
-        Put("problems/{Id}");
-        AllowAnonymous();
+        Put("api/problems/update");
     }
 
-    public override async Task<Results<Ok, BadRequest<string>, NotFound, InternalServerError>> HandleAsync(UpdateProblemRequest request, CancellationToken cancellationToken)
+    public override async Task<Results<Ok, BadRequest<string>, NotFound, InternalServerError>> ExecuteAsync(UpdateProblemRequest request, CancellationToken cancellationToken)
     {
         Problem? problem = await _dbContext.Problems
                                        .FirstOrDefaultAsync(x => x.Id == request.Id, cancellationToken);
@@ -40,8 +39,9 @@ public class UpdateProblemEndpoint : Endpoint<UpdateProblemRequest, Results<Ok, 
             problem.Title = request.Title;
             problem.Description = request.Description;
             problem.DatesUpdated.Add(DateTime.UtcNow);
-        
-            await SendNoContentAsync(cancellationToken);
+            
+            await _dbContext.SaveChangesAsync(cancellationToken);
+            await transaction.CommitAsync(cancellationToken);
         }
         catch (Exception exception)
         {
