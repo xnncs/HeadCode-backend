@@ -1,7 +1,7 @@
 namespace HeadCode.Api.Mapping.Mapster;
 
 using Core.Models;
-using Endpoints.Problems.GetAllProblems;
+using Endpoints.Problems.Get;
 using Endpoints.ProblemTests.Get;
 using global::Mapster;
 

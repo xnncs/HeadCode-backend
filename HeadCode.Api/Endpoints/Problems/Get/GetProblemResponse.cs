@@ -1,11 +1,9 @@
-namespace HeadCode.Api.Endpoints.Problems.GetAllProblems;
-
-using Core.Models;
+namespace HeadCode.Api.Endpoints.Problems.Get;
 
 public class GetProblemResponse
 {
     public Guid Id { get; set; }
-    
+
     public string Title { get; set; }
     public string Description { get; set; }
     public DateTime DateCreated { get; set; }

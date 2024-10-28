@@ -1,6 +1,6 @@
-namespace HeadCode.Infrastructure.Helpers.Absract;
+namespace HeadCode.Infrastructure.Helpers.Abstract;
 
-using Core.Models;
+using HeadCode.Core.Models;
 
 public interface IJwtProvider
 {

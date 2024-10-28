@@ -8,7 +8,7 @@ public static class ConfigurationExtensions
     public static IServiceCollection AddDataAccessServices(this IServiceCollection services)
     {
         services.AddDbContext<ApplicationDbContext>();
-        
+
         return services;
     }
 }

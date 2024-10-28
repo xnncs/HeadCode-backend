@@ -7,10 +7,11 @@ using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 
-public class UpdateTestEndpoint : Endpoint<UpdateTestRequest, Results<Ok, BadRequest<string>, NotFound, InternalServerError>>
+public class
+    UpdateTestEndpoint : Endpoint<UpdateTestRequest, Results<Ok, BadRequest<string>, NotFound, InternalServerError>>
 {
-    private readonly ILogger<UpdateTestEndpoint> _logger;
     private readonly ApplicationDbContext _dbContext;
+    private readonly ILogger<UpdateTestEndpoint> _logger;
 
     public UpdateTestEndpoint(ILogger<UpdateTestEndpoint> logger, ApplicationDbContext dbContext)
     {
@@ -23,23 +24,22 @@ public class UpdateTestEndpoint : Endpoint<UpdateTestRequest, Results<Ok, BadReq
         Put("api/tests/update");
     }
 
-    public override async Task<Results<Ok, BadRequest<string>, NotFound, InternalServerError>> ExecuteAsync(UpdateTestRequest request, CancellationToken cancellationToken)
+    public override async Task<Results<Ok, BadRequest<string>, NotFound, InternalServerError>> ExecuteAsync(
+        UpdateTestRequest request, CancellationToken cancellationToken)
     {
         ProblemTest? problemTest = await _dbContext.ProblemTests
                                                    .FirstOrDefaultAsync(x => x.Id == request.Id, cancellationToken);
-        
-        if (problemTest == null)
-        {
-            return TypedResults.NotFound();
-        }
 
-        await using IDbContextTransaction transaction = await _dbContext.Database.BeginTransactionAsync(cancellationToken);
+        if (problemTest == null) return TypedResults.NotFound();
+
+        await using IDbContextTransaction transaction =
+            await _dbContext.Database.BeginTransactionAsync(cancellationToken);
         try
         {
             problemTest.DatesUpdated.Add(DateTime.UtcNow);
             problemTest.InputData = request.InputData;
             problemTest.CorrectOutputData = request.CorrectOutputData;
-            
+
             await _dbContext.SaveChangesAsync(cancellationToken);
             await transaction.CommitAsync(cancellationToken);
         }

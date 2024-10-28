@@ -1,15 +1,16 @@
 namespace HeadCode.Infrastructure.Extensions;
 
 using System.Text;
-using HeadCode.Infrastructure.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
+using Models;
 
 public static class AuthenticationExtensions
 {
-    public static IServiceCollection AddApiAuthentication(this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection AddApiAuthentication(this IServiceCollection services,
+                                                          IConfiguration configuration)
     {
         JwtOptions jwtOptions = configuration.GetSection(nameof(JwtOptions)).Get<JwtOptions>() ??
                                 throw new Exception("Wrong jwtOptions format");
@@ -40,7 +41,7 @@ public static class AuthenticationExtensions
                  });
 
         services.AddAuthorization();
-        
+
         return services;
     }
 }

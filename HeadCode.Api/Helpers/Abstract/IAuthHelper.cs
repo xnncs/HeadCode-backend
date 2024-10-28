@@ -4,5 +4,5 @@ using Core.Models;
 
 public interface IAuthHelper
 {
-     Task<User?> GetUserFromCookiesAsync(HttpContext httpContext);
+    Task<User?> GetUserFromCookiesAsync(HttpContext httpContext);
 }

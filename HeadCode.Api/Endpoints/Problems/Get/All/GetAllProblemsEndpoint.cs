@@ -1,15 +1,14 @@
-namespace HeadCode.Api.Endpoints.Problems.GetAllProblems;
+namespace HeadCode.Api.Endpoints.Problems.Get.All;
 
-using Core.Models;
-using DataAccess.DatabaseContexts;
 using FastEndpoints;
+using HeadCode.DataAccess.DatabaseContexts;
 using Mapster;
 using Microsoft.EntityFrameworkCore;
 
 public class GetAllProblemsEndpoint : EndpointWithoutRequest<List<GetProblemResponse>>
 {
-    private readonly ILogger<GetAllProblemsEndpoint> _logger;
     private readonly ApplicationDbContext _dbContext;
+    private readonly ILogger<GetAllProblemsEndpoint> _logger;
 
     public GetAllProblemsEndpoint(ILogger<GetAllProblemsEndpoint> logger, ApplicationDbContext dbContext)
     {
@@ -22,11 +21,11 @@ public class GetAllProblemsEndpoint : EndpointWithoutRequest<List<GetProblemResp
         Get("api/problems/get");
         AllowAnonymous();
     }
-    
+
     public override async Task<List<GetProblemResponse>> ExecuteAsync(CancellationToken cancellationToken)
     {
         return await _dbContext.Problems.AsNoTracking()
-                                                            .ProjectToType<GetProblemResponse>()
-                                                            .ToListAsync(cancellationToken);
+                               .ProjectToType<GetProblemResponse>()
+                               .ToListAsync(cancellationToken);
     }
 }

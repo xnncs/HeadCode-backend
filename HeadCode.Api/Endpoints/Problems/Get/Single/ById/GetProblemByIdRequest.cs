@@ -1,4 +1,4 @@
-namespace HeadCode.Api.Endpoints.Problems.GetAllProblems;
+namespace HeadCode.Api.Endpoints.Problems.Get.Single.ById;
 
 public class GetProblemByIdRequest
 {

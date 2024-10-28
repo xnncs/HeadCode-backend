@@ -1,33 +1,36 @@
-namespace HeadCode.Api.Endpoints.Problems.AddProblem;
+namespace HeadCode.Api.Endpoints.Problems.Add;
 
-using Core.Models;
-using DataAccess.DatabaseContexts;
 using FastEndpoints;
+using HeadCode.Core.Models;
+using HeadCode.DataAccess.DatabaseContexts;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore.Storage;
 
-public class AddProblemEndpoint : Endpoint<AddProblemRequest, Results<Created, BadRequest<string>, InternalServerError>>
+public class AddProblemEndpoint : Endpoint<AddProblemRequest, Created>
 {
+    private readonly ApplicationDbContext _dbContext;
+
+    private readonly ILogger<AddProblemEndpoint> _logger;
+
     public AddProblemEndpoint(ILogger<AddProblemEndpoint> logger, ApplicationDbContext dbContext)
     {
         _logger = logger;
         _dbContext = dbContext;
     }
-    
-    private readonly ILogger<AddProblemEndpoint> _logger;
-    private readonly ApplicationDbContext _dbContext;
-    
+
 
     public override void Configure()
     {
         Post("api/problems/add");
     }
 
-    public override async Task<Results<Created, BadRequest<string>, InternalServerError>> ExecuteAsync(AddProblemRequest request, CancellationToken cancellationToken)
+    public override async Task<Created> ExecuteAsync(
+        AddProblemRequest request, CancellationToken cancellationToken)
     {
         Problem created = Problem.Create(request.Title, request.Description);
-        
-        await using IDbContextTransaction transaction = await _dbContext.Database.BeginTransactionAsync(cancellationToken);
+
+        await using IDbContextTransaction transaction =
+            await _dbContext.Database.BeginTransactionAsync(cancellationToken);
         try
         {
             _dbContext.Problems.Add(created);
@@ -37,9 +40,8 @@ public class AddProblemEndpoint : Endpoint<AddProblemRequest, Results<Created, B
         catch (Exception exception)
         {
             _logger.LogError(exception.Message);
-            return TypedResults.InternalServerError();
         }
-        
+
         return TypedResults.Created();
     }
 }

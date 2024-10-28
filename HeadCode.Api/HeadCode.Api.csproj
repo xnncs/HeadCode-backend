@@ -8,24 +8,27 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="FastEndpoints" Version="5.30.0" />
-        <PackageReference Include="Mapster" Version="7.4.0" />
-        <PackageReference Include="Mapster.Core" Version="1.2.1" />
-        <PackageReference Include="Mapster.DependencyInjection" Version="1.0.1" />
-        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.10" />
+        <PackageReference Include="FastEndpoints" Version="5.30.0"/>
+        <PackageReference Include="FluentValidation" Version="11.10.0" />
+        <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.10.0" />
+        <PackageReference Include="Mapster" Version="7.4.0"/>
+        <PackageReference Include="Mapster.Core" Version="1.2.1"/>
+        <PackageReference Include="Mapster.DependencyInjection" Version="1.0.1"/>
+        <PackageReference Include="MediatR" Version="12.4.1" />
+        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.10"/>
         <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.0-rc.1.24452.1"/>
-        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.9.0" />
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.9.0"/>
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\HeadCode.DataAccess\HeadCode.DataAccess.csproj" />
-      <ProjectReference Include="..\HeadCode.Infrastructure\HeadCode.Infrastructure.csproj" />
+        <ProjectReference Include="..\HeadCode.DataAccess\HeadCode.DataAccess.csproj"/>
+        <ProjectReference Include="..\HeadCode.Infrastructure\HeadCode.Infrastructure.csproj"/>
     </ItemGroup>
 
     <ItemGroup>
-      <Content Include="..\.dockerignore">
-        <Link>.dockerignore</Link>
-      </Content>
+        <Content Include="..\.dockerignore">
+            <Link>.dockerignore</Link>
+        </Content>
     </ItemGroup>
 
 </Project>

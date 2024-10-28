@@ -11,7 +11,7 @@ public class ProblemEntityTypeConfiguration : IEntityTypeConfiguration<Problem>
     {
         builder.HasKey(x => x.Id);
         builder.Property(x => x.Id).ValueGeneratedNever();
-        
+
         builder.HasMany(x => x.Tests)
                .WithOne(x => x.Problem)
                .HasForeignKey(x => x.ProblemId);

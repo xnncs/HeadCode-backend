@@ -1,4 +1,4 @@
-namespace HeadCode.Api.Endpoints.Problems.AddProblem;
+namespace HeadCode.Api.Endpoints.Problems.Add;
 
 public class AddProblemRequest
 {

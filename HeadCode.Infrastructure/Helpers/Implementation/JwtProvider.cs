@@ -3,7 +3,7 @@ namespace HeadCode.Infrastructure.Helpers.Implementation;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using Absract;
+using Abstract;
 using Core.Models;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;

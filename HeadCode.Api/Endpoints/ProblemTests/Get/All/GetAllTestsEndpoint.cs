@@ -7,8 +7,8 @@ using Microsoft.EntityFrameworkCore;
 
 public class GetAllTestsEndpoint : EndpointWithoutRequest<List<GetTestResponse>>
 {
-    private readonly ILogger<GetAllTestsEndpoint> _logger;
     private readonly ApplicationDbContext _dbContext;
+    private readonly ILogger<GetAllTestsEndpoint> _logger;
 
     public GetAllTestsEndpoint(ILogger<GetAllTestsEndpoint> logger, ApplicationDbContext dbContext)
     {
