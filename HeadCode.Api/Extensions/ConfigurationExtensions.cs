@@ -7,6 +7,7 @@ using FluentValidation;
 using Helpers.Abstract;
 using Helpers.Implementation;
 using Infrastructure.Extensions;
+using Kafka.Configuration;
 using Mapster;
 using MediatR;
 using Microsoft.AspNetCore.CookiePolicy;
@@ -38,6 +39,8 @@ public static class ConfigurationExtensions
                  .AddBehavior<IPipelineBehavior<AddProblemRequest, Results<Created, BadRequest<string>>>,
             ValidationBehaviour<AddProblemRequest, Created>>()
             );
+
+        services.AddConfiguredKafka();
         
         return services;
     }

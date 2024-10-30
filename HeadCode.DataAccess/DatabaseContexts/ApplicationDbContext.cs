@@ -16,7 +16,7 @@ public sealed class ApplicationDbContext : DbContext
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         const string connectionString =
-            "Server=localhost;Database=HeadCode;Username=postgres;Password=1425;Port=5432;Include Error Detail=true";
+            "Server=database;Database=HeadCode;Username=postgres;Password=1425;Port=5432;Include Error Detail=true";
 
         optionsBuilder.UseNpgsql(connectionString)
                       .EnableSensitiveDataLogging();
